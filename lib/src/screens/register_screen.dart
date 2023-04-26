@@ -1,4 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import '../common/constants/color_constants.dart';
+import '../common/constants/padding_constants.dart';
+import '../common/widgets/custom_text_field.dart';
+import '../common/widgets/divider_line.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -14,7 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       // resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFF3F4F6),
       navigationBar: const CupertinoNavigationBar(
         backgroundColor: CupertinoColors.white,
         border: Border(),
@@ -24,49 +27,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: ListView(
           children: [
             const SizedBox(height: 32),
-            const CupertinoTextField(
-              placeholder: 'Логин',
-              decoration: BoxDecoration(
-                color: CupertinoColors.white,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 19, horizontal: 16),
-            ),
-            Container(
-              height: 1,
-              color: const Color(0xFFE0E6ED),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-            const CupertinoTextField(
+            const CustomTextField(),
+            const DividerLine(),
+            const CustomTextField(
               placeholder: 'Телефон',
-              decoration: BoxDecoration(
-                color: CupertinoColors.white,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 19, horizontal: 16),
             ),
-            Container(
-              height: 1,
-              color: const Color(0xFFE0E6ED),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-            const CupertinoTextField(
+            const DividerLine(),
+            const CustomTextField(
               placeholder: 'Почта',
-              decoration: BoxDecoration(
-                color: CupertinoColors.white,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 19, horizontal: 16),
             ),
-            Container(
-              height: 1,
-              color: const Color(0xFFE0E6ED),
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-            ),
-            CupertinoTextField(
+            const DividerLine(),
+            CustomTextField(
               obscureText: obscureText,
               placeholder: 'Пароль',
-              decoration: const BoxDecoration(
-                color: CupertinoColors.white,
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
               suffix: CupertinoButton(
                 child: Icon(
                   obscureText ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
@@ -81,10 +54,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             const SizedBox(height: 250),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: AppPaddings.horizontal,
               child: CupertinoButton(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                color: const Color(0xFF4631D2),
+                padding: AppPaddings.vertical,
+                color: AppColors.main,
                 child: const Text(
                   'Создать аккаунт',
                   style: TextStyle(
