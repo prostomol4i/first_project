@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/src/screens/register_screen.dart';
+
+import '../../router/routing_const.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -7,9 +10,9 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       backgroundColor: const Color(0xFFF3F4F6),
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         backgroundColor: CupertinoColors.white,
-        border: const Border(),
+        border: Border(),
         middle: Text('Авторизация'),
       ),
       child: SafeArea(
@@ -17,24 +20,24 @@ class AuthScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CupertinoTextField(
+            const CupertinoTextField(
               placeholder: 'Логин или почта',
               decoration: BoxDecoration(
                 color: CupertinoColors.white,
               ),
-              padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
+              padding: EdgeInsets.symmetric(vertical: 19, horizontal: 16),
             ),
             Container(
               height: 1,
-              color: Color(0xFFE0E6ED),
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              color: const Color(0xFFE0E6ED),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
             ),
-            CupertinoTextField(
+            const CupertinoTextField(
               placeholder: 'Пароль',
               decoration: BoxDecoration(
                 color: CupertinoColors.white,
               ),
-              padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
+              padding: EdgeInsets.symmetric(vertical: 19, horizontal: 16),
             ),
             const SizedBox(height: 32),
             Padding(
@@ -63,7 +66,9 @@ class AuthScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, RegisterRoute);
+                },
               ),
             )
           ],
