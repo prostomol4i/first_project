@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import '../common/constants/color_constants.dart';
-import '../common/constants/padding_constants.dart';
-import '../common/widgets/custom_text_field.dart';
-import '../common/widgets/divider_line.dart';
+import '../../common/constants/color_constants.dart';
+import '../../common/constants/padding_constants.dart';
+import '../../common/widgets/custom_text_field.dart';
+import '../../common/widgets/divider_line.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -19,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return CupertinoPageScaffold(
       // resizeToAvoidBottomInset: false,
       navigationBar: const CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.white,
+        backgroundColor: AppColors.white,
         border: Border(),
         middle: Text('Регистрация'),
       ),
