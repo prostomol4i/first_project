@@ -8,8 +8,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+    return const CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
         backgroundColor: AppColors.white,
         border: Border(),
         middle: Text('Профиль'),
@@ -19,11 +19,12 @@ class ProfileScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Icon(
+            Icon(
               CupertinoIcons.profile_circled,
               size: 100,
               color: AppColors.black,
             ),
+            
           ],
         ),
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common/constants/color_constants.dart';
 import 'package:flutter_application_1/src/router/router.dart';
-import 'package:flutter_application_1/src/screens/main/main_screen.dart';
+import 'package:flutter_application_1/src/router/routing_const.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ],
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter.generateRoute,
-      home: MainScreen(),
+      initialRoute: AuthRoute,
       theme: CupertinoThemeData(
         scaffoldBackgroundColor: AppColors.scaffoldBackground,
       ),
