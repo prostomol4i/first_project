@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
 import '../../common/constants/color_constants.dart';
 import '../../common/constants/padding_constants.dart';
 import '../../common/widgets/custom_text_field.dart';
@@ -52,6 +53,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 onPressed: () async {
+                  Box tokensBox = Hive.box('tokens');
+                  tokensBox.put('access', 'testovaya_zapis');
+                  print(tokensBox.get('access'));
                   try {
                     Response response = await dio.post(
                       'http://45.10.110.181:8080/api/v1/auth/login',
@@ -61,6 +65,12 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     );
                     print(response.data['tokens']['accessToken']);
+                    tokensBox.put(
+                        'access', response.data['tokens']['accessToken']);
+                    tokensBox.put(
+                        'refresh', response.data['tokens']['refreshToken']);
+                    print(tokensBox.get('access'));
+                    print(tokensBox.get('refresh'));
                     Navigator.pushReplacementNamed(context, MainRoute);
                   } on DioError catch (e) {
                     print(e.response!.data);
