@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/common/models/tokens_model.dart';
+import 'package:flutter_application_1/src/common/models/user_model.dart';
 import 'package:hive/hive.dart';
 import '../../common/constants/color_constants.dart';
 import '../../common/constants/padding_constants.dart';
@@ -55,7 +56,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 onPressed: () async {
                   Box tokensBox = Hive.box('tokens');
-
+                  Box userBox = Hive.box('user');
                   try {
                     Response response = await dio.post(
                       'http://45.10.110.181:8080/api/v1/auth/login',
@@ -64,7 +65,13 @@ class _AuthScreenState extends State<AuthScreen> {
                         "password": passwordController.text,
                       },
                     );
-
+                    UserModel userModel = UserModel.fromJson(
+                      response.data['user'],
+                    );
+                    userBox.put('id', userModel.id);
+                    userBox.put('email', userModel.email);
+                    userBox.put('nickname', userModel.nickname);
+                    
                     TokensModel tokensModel = TokensModel.fromJson(
                      response.data['tokens'],
                     );
