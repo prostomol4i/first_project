@@ -1,68 +1,48 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/common/constants/color_constants.dart';
+import 'package:flutter_application_1/src/router/router.dart';
+import 'package:flutter_application_1/src/router/routing_const.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('tokens');
+  await Hive.openBox('user');
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.pink, shadowColor: Colors.yellow,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page', titki: 'Флуттер Демо Хоме Паге',),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.titki});
-  final String title;
-   final String titki;
-
+class _MyAppState extends State<MyApp> {
+  String initialRoute = AuthRoute;
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter--;
-    });
+  void initState() {
+    Box tokensBox = Hive.box('tokens');
+    if (tokensBox.get('access') != null || tokensBox.get('refresh') != null) {
+      initialRoute = MainRoute;
+    }
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return CupertinoApp(
+      localizationsDelegates: const [
+        DefaultCupertinoLocalizations.delegate,
+        DefaultMaterialLocalizations.delegate,
+      ],
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: AppRouter.generateRoute,
+      initialRoute: initialRoute,
+      theme: const CupertinoThemeData(
+        scaffoldBackgroundColor: AppColors.scaffoldBackground,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(widget.titki, textAlign: TextAlign.end,
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.right,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.exposure_minus_1),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
