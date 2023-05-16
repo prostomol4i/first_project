@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/src/common/models/tokens_model.dart';
 import 'package:hive/hive.dart';
 import '../../common/constants/color_constants.dart';
 import '../../common/constants/padding_constants.dart';
@@ -54,8 +55,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 onPressed: () async {
                   Box tokensBox = Hive.box('tokens');
-                  tokensBox.put('access', 'testovaya_zapis');
-                  print(tokensBox.get('access'));
+
                   try {
                     Response response = await dio.post(
                       'http://45.10.110.181:8080/api/v1/auth/login',
@@ -64,16 +64,15 @@ class _AuthScreenState extends State<AuthScreen> {
                         "password": passwordController.text,
                       },
                     );
-                    print(response.data['tokens']['accessToken']);
-                    tokensBox.put(
-                        'access', response.data['tokens']['accessToken']);
-                    tokensBox.put(
-                        'refresh', response.data['tokens']['refreshToken']);
-                    print(tokensBox.get('access'));
-                    print(tokensBox.get('refresh'));
+
+                    TokensModel tokensModel = TokensModel.fromJson(
+                     response.data['tokens'],
+                    );
+                    tokensBox.put('access', tokensModel.access);
+                    tokensBox.put('refresh', tokensModel.refresh);
+
                     Navigator.pushReplacementNamed(context, MainRoute);
                   } on DioError catch (e) {
-                    print(e.response!.data);
                     showCupertinoModalPopup(
                       context: context,
                       builder: (context) {

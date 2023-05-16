@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/src/router/router.dart';
 import 'package:flutter_application_1/src/screens/auth/auth_screen.dart';
 import 'package:flutter_application_1/src/screens/home/home_screen.dart';
 import 'package:flutter_application_1/src/screens/profile/profile.dart';
@@ -24,6 +25,7 @@ class MainScreen extends StatelessWidget {
         ),
         tabBuilder: (context, index) {
           return CupertinoTabView(
+            onGenerateRoute: AppRouter.generateRoute,
             builder: (context) {
               switch (index) {
                 case 0:
