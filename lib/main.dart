@@ -8,6 +8,7 @@ import 'package:hive_flutter/adapters.dart';
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox('tokens');
+  await Hive.openBox('user');
   runApp(const MyApp());
 }
 
