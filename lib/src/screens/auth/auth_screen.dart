@@ -77,7 +77,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     );
                     tokensBox.put('access', tokensModel.access);
                     tokensBox.put('refresh', tokensModel.refresh);
-
                     Navigator.pushReplacementNamed(context, MainRoute);
                   } on DioError catch (e) {
                     showCupertinoModalPopup(
