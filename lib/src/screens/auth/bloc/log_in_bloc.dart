@@ -15,6 +15,8 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
   final Box userBox = Hive.box('user');
   LogInBloc() : super(LogInInitial()) {
     on<LogInPressed>((event, emit) async {
+      emit(LogInLoading());
+
       try {
         Response response = await dio.post(
           'http://45.10.110.181:8080/api/v1/auth/login',
@@ -37,7 +39,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         tokensBox.put('refresh', tokensModel.refresh);
 
         emit(LogInLoaded());
-      } on DioError catch (e) {
+      } on DioError {
         emit(LogInFailed(message: 'Неправильный логин или пароль'));
         rethrow;
       } catch (e) {
