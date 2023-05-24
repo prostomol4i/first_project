@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common/constants/color_constants.dart';
+import 'package:flutter_application_1/src/common/dependencies/injection_container.dart';
 import 'package:flutter_application_1/src/router/router.dart';
 import 'package:flutter_application_1/src/router/routing_const.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -9,6 +10,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('tokens');
   await Hive.openBox('user');
+  await initGetIt();
   runApp(const MyApp());
 }
 
